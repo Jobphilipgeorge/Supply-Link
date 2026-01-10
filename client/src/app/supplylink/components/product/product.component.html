@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+ 
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="user-form">
+ 
+<div class="form-group">
+<label>Warehouse</label>
+<select formControlName="warehouse">
+<option value="">Select Warehouse</option>
+<option *ngFor="let warehouse of warehouses | async"
+[ngValue]="warehouse">
+{{ warehouse.warehouseName }}
+</option>
+</select>
+</div>
+ 
+<div class="form-group">
+<label>Product Name</label>
+<input type="text" formControlName="productName" />
+</div>
+ 
+<div class="form-group">
+<label>Product Description</label>
+<input type="text" formControlName="productDescription" />
+</div>
+ 
+<div class="form-group">
+<label>Quantity</label>
+<input type="number" formControlName="quantity" />
+</div>
+ 
+<div class="form-group">
+<label>Price</label>
+<input type="number" formControlName="price" />
+</div>
+ 
+<button type="submit" class="btn-submit"
+[disabled]="productForm.invalid">
+Create Product
+</button>
+ 
+<div class="error" *ngIf="productError | async as err">{{ err }}</div>
+<div class="success" *ngIf="productSuccess | async as msg">{{ msg }}</div>
+ 
+<a routerLink="/supplylink" class="task-list">Dashboard</a>
+</form>
